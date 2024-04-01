@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mlapi-dep
+  namespace: {{ .Values.app.env  }}
+  labels:
+  {{- include "mlapi.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: mlapi
+  template:
+    metadata:
+      labels:
+        {{- include "mlapi.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: mlapi
+          image: {{ .Values.app.container.image }}
+          imagePullPolicy: IfNotPresent
+          resources:
+           {{- toYaml .Values.app.computerc | nindent 12 }}
