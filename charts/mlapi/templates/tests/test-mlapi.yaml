@@ -6,7 +6,7 @@ metadata:
     app: test
   annotations:
     "helm.sh/hook": test
-    "helm.sh/hook-delete-policy": before-hook-creation, hook-failed
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-succeeded
 spec:
   containers:
   - name: test-container
