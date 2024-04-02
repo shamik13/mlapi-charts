@@ -22,5 +22,5 @@ spec:
           resources:
            {{- toYaml .Values.app.computerc | nindent 12 }}
           envFrom:
-            configMapRef:
-              name: mlapi-config
+          - configMapRef:
+            name: mlapi-config
