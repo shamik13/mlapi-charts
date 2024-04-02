@@ -27,7 +27,7 @@ jobs:
         run: |
           cd infra/${{ github.event.inputs.chartName }}
           helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
-          -f values-${{ github.event.inputs.env }.yaml --namespace ${{ github.event.inputs.env }} \
+          -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} \
           --wait
           helm list -A
           shell: bash
