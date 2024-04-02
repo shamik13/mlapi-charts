@@ -11,7 +11,7 @@ app:
       cpu: 0.2
       memory: 500Mi
   svc:
-    nodeport: 33000
+    nodeport: 32500
 
 hpa:
   enabled: false
