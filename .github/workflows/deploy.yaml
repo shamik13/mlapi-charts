@@ -21,7 +21,6 @@ jobs:
         run: |
           helm repo add mycharts "${{ secrets.CHART_REPO_URL }}"
           helm repo update
-          shell: bash
 
       - name: Install or Upgrade Helm Chart
         run: |
@@ -30,4 +29,3 @@ jobs:
           -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} \
           --wait
           helm list -A
-          shell: bash
