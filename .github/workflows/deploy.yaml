@@ -26,17 +26,20 @@ jobs:
           helm repo add mycharts "${{ secrets.CHART_REPO_URL }}"
           helm repo update
 
-      - name: Install or Upgrade Helm Chart and Test
+      - name: Install or Upgrade Helm Chart without version and Test
+        if: "if eq(github.event.inputs.chartVersion, '')"
         run: |
           cd infra/${{ github.event.inputs.chartName }}
-          ${{ if eq(github.event.inputs.chartVersion, '') then \
           helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
           -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} \
-          --wait \
-          else
+          --wait
+          helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
+          helm list -A
+      - name: Install or Upgrade Helm Chart with version and Test
+        if: "if contains(github.event.inputs.chartVersion, '.')"
+        run: |
           helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
           -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} --version ${{ github.event.inputs.chartVersion }} \
-          --wait \
-          end }}
+          --wait
           helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
           helm list -A
