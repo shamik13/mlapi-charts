@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-endpoint-test"
+  labels:
+    app: test
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation, hook-failed
+spec:
+  containers:
+  - name: test-container
+    image: curlimages/curl:latest  # Uses the official curl image
+    command: ["curl", "mlapi-service.{{ .Values.app.env }}.svc.cluster.local:5000/api/v1/message/false","-o", "/results/output"]  # Replace with your service and port
+    volumeMounts:
+    - name: results
+      mountPath: /results
+  - name: test-result
+    image: busybox:latest
+    command: ["sh", "-c", "cat /results/output | grep 'Hello World!' && exit $? || exit 1"]
+    volumeMounts:
+    - name: results
+      mountPath: /results
+  restartPolicy: Never
+  volumes:
+  - name: results
+    emptyDir: {}

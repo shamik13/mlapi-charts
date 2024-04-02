@@ -22,10 +22,11 @@ jobs:
           helm repo add mycharts "${{ secrets.CHART_REPO_URL }}"
           helm repo update
 
-      - name: Install or Upgrade Helm Chart
+      - name: Install or Upgrade Helm Chart and Test
         run: |
           cd infra/${{ github.event.inputs.chartName }}
           helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
           -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} \
           --wait
+          helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
           helm list -A
