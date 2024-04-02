@@ -32,11 +32,11 @@ jobs:
           if [[ ! -z "${{ github.event.inputs.chartVersion }}" ]]; then
             helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
             -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} --version ${{ github.event.inputs.chartVersion}} \
-            --wait \
+            --wait
           else
             helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
             -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }}  \
-            --wait \
+            --wait
           fi
           helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
           helm list -A
