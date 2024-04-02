@@ -6,9 +6,13 @@ on:
       chartName:
         description: Name of the chart to deploy
         required: true
+      chartVersion:
+        description: If you want to install a specific chart version
+        required: false
       env:
         description: Which environment to deploy in
         required: true
+
 
 jobs:
   deploy:
@@ -25,8 +29,14 @@ jobs:
       - name: Install or Upgrade Helm Chart and Test
         run: |
           cd infra/${{ github.event.inputs.chartName }}
+          ${{ if eq(github.event.inputs.chartVersion, '') then \
           helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
           -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} \
-          --wait
+          --wait \
+          else
+          helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
+          -f values-${{ github.event.inputs.env }}.yaml --namespace ${{ github.event.inputs.env }} --version ${{ github.event.inputs.chartVersion }} \
+          --wait \
+          end }}
           helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
           helm list -A
