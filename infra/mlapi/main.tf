@@ -29,7 +29,7 @@ resource "helm_release" "my_chart" {
   name       = "mycharts"
   repository = "https://shamik13.github.io/mlapi-charts"
   chart      = "mlapi"
-  version    = "0.1.0"
+  version    = "0.1.1"
 
   values = [
     "${file("values-dev.yaml")}"
