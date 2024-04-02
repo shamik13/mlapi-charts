@@ -1,0 +1,31 @@
+name: Deploy to Minikube k8s
+
+on:
+  workflow_dispatch:
+    inputs:
+      chartName:
+        description: Name of the chart to deploy
+        required: true
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Deploy Helm chart with Terraform
+        run: |
+          # Clone your Helm chart repository
+          cd infra/${{ github.event.inputs.chartName }}
+
+          # Initialize Terraform
+          terraform init
+
+          # Apply Terraform configuration
+          terraform apply -auto-approve
+
+      - name: Verify deployment
+        run: |
+          # Verify Helm release
+          helm list
