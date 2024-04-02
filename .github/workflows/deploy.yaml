@@ -6,6 +6,9 @@ on:
       chartName:
         description: Name of the chart to deploy
         required: true
+      env:
+        description: Which environment to deploy in
+        required: true
 
 jobs:
   deploy:
@@ -14,18 +17,17 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v2
 
-      - name: Deploy Helm chart with Terraform
+      - name: Add Helm Repository
         run: |
-          # Clone your Helm chart repository
+          helm repo add mycharts "${{ secrets.CHART_REPO_URL }}"
+          helm repo update
+          shell: bash
+
+      - name: Install or Upgrade Helm Chart
+        run: |
           cd infra/${{ github.event.inputs.chartName }}
-
-          # Initialize Terraform
-          terraform init
-
-          # Apply Terraform configuration
-          terraform apply -auto-approve
-
-      - name: Verify deployment
-        run: |
-          # Verify Helm release
-          helm list
+          helm upgrade --install ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }} mycharts/${{ github.event.inputs.chartName }} \
+          -f values-${{ github.event.inputs.env }.yaml --namespace ${{ github.event.inputs.env }} \
+          --wait
+          helm list -A
+          shell: bash
