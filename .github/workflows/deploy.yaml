@@ -39,4 +39,7 @@ jobs:
             --wait
           fi
           helm test --namespace ${{ github.event.inputs.env }} ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
+          if [[ $? -ne 0 ]]; then
+          helm rollback ${{ github.event.inputs.chartName }}-${{ github.event.inputs.env }}
+          fi
           helm list -A
