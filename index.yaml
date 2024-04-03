@@ -3,6 +3,16 @@ entries:
   mlapi:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2024-04-03T00:08:17.882347654Z"
+    description: A Helm chart for Kubernetes
+    digest: c0e851b6ca600b0b6cbd18eeeefdb9806657702e1802667a6de0964e209dd396
+    name: mlapi
+    type: application
+    urls:
+    - https://github.com/shamik13/mlapi-charts/releases/download/mlapi-0.1.9/mlapi-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2024-04-03T00:03:41.055155348Z"
     description: A Helm chart for Kubernetes
     digest: 069da493220d6b0c2be00a85cbed3d46964fcdb473ffff8be5bf9c9c890eed4b
@@ -91,4 +101,4 @@ entries:
     urls:
     - https://github.com/shamik13/mlapi-charts/releases/download/mlapi-0.1.0/mlapi-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-03T00:03:41.055212094Z"
+generated: "2024-04-03T00:08:17.882393289Z"
