@@ -17,7 +17,7 @@ spec:
       mountPath: /results
   - name: test-result
     image: busybox:latest
-    command: ["sh", "-c", "cat /results/output | grep 'Hello Worldd!' && exit $? || exit 1"]
+    command: ["sh", "-c", "cat /results/output | grep 'Hello World!' && exit $? || exit 1"]
     volumeMounts:
     - name: results
       mountPath: /results
