@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mlapi-config
+  name: {{ template "mlapi.name" . }}
   namespace: {{ .Values.app.env  }}
   labels:
-     {{- include "obj.labels" . | nindent 4 }}
+     {{- include "mlapi.labels" . | nindent 4 }}
 data:
   {{ .Values.config.name }}: |
     {{- toYaml .Values.config.data | nindent 4 }}

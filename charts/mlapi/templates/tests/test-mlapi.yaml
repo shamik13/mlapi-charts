@@ -11,7 +11,7 @@ spec:
   containers:
   - name: test-container
     image: curlimages/curl:latest  # Uses the official curl image
-    command: ["curl", "mlapi-service.{{ .Values.app.env }}.svc.cluster.local:5000/api/v1/message/false","-o", "/results/output"]  # Replace with your service and port
+    command: ["curl", "{{ template "mlapi.name" . }}.{{ .Values.app.env }}.svc.cluster.local:5000/api/v1/message/false","-o", "/results/output"]  # Replace with your service and port
     volumeMounts:
     - name: results
       mountPath: /results

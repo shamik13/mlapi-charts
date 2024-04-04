@@ -2,16 +2,16 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: mlapi-hpa
+  name: {{ template "mlapi.name" . }}
   namespace: {{ .Values.app.env  }}
   annotations:
-    {{- include "obj.labels" . | nindent 4 }}
+    {{- include "mlapi.labels" . | nindent 4 }}
 spec:
   maxReplicas: {{ .Values.hpa.maxreplicas }}
   minReplicas: {{ .Values.hpa.minrplicas }}
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: Deployment
-    name: mlapi
+    name: {{ template "mlapi.name" . }}
   targetCPUUtilizationPercentage: {{ .Values.hpa.cuputi }}
 {{- end -}}
