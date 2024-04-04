@@ -8,6 +8,7 @@ i. If you want to see all the env variables in the running app:
  
 curl http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/true
 
-ii. If you want to see a "Hello World!" printed on a blank webpage:
+
+ii. If you want to see a "Hello World!" message:
  
 curl  http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/false
