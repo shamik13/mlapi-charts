@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mlapi
-          image: mlapi:{{ .Chart.AppVersion }}
+          image: shamik13/{{ template "mlapi.name" . }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
           resources:
            {{- toYaml .Values.app.computerc | nindent 12 }}
