@@ -3,6 +3,16 @@ entries:
   mlapi:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2024-04-04T07:21:37.415858566Z"
+    description: A Helm chart for mlapi application.
+    digest: 2d23cd355d0a0957b505e999e1655eb720307b9db941b02b68507ec10eb9eaf7
+    name: mlapi
+    type: application
+    urls:
+    - https://github.com/shamik13/mlapi-charts/releases/download/mlapi-0.1.13/mlapi-0.1.13.tgz
+    version: 0.1.13
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2024-04-04T07:12:31.828909438Z"
     description: A Helm chart for mlapi application.
     digest: 24d5f325802432ae0d79744ae01e7640f8d83f460762304a04c4bfea5122ae40
@@ -131,4 +141,4 @@ entries:
     urls:
     - https://github.com/shamik13/mlapi-charts/releases/download/mlapi-0.1.0/mlapi-0.1.0.tgz
     version: 0.1.0
-generated: "2024-04-04T07:12:31.829022149Z"
+generated: "2024-04-04T07:21:37.415971517Z"
