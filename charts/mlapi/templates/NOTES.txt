@@ -1,13 +1,13 @@
 {{ template "mlapi.name" .  }} has been deployed successfully!
 
-Now you should be able to access the API endpoint at following URL:
+Now you should be able to access the API endpoint. Run the following commands in terminal:
  
 export MINIKUBE_IP=$(minikube ip)
 
- i. If you want to see all the env variables in the running app:
+i. If you want to see all the env variables in the running app:
  
- http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/true
+curl http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/true
 
- ii. If you want to see a "Hello World!" printed on a blank webpage:
+ii. If you want to see a "Hello World!" printed on a blank webpage:
  
- http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/false
+curl  http://${MINIKUBE_IP}:{{ .Values.app.svc.nodeport }}/api/v1/message/false

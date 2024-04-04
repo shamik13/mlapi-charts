@@ -9,18 +9,18 @@ spec:
   replicas: {{ .Values.app.replicas }}
   selector:
     matchLabels:
-      app: mlapi
+      app: {{ template "mlapi.name" . }}
   template:
     metadata:
       labels:
         {{- include "mlapi.labels" . | nindent 8 }}
     spec:
       containers:
-        - name: mlapi
+        - name: {{ template "mlapi.name" . }}
           image: shamik13/{{ template "mlapi.name" . }}:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
           resources:
            {{- toYaml .Values.app.computerc | nindent 12 }}
           envFrom:
           - configMapRef:
-              name: mlapi-config
+              name: {{ template "mlapi.name" . }}
