@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.name }}-config
+  name: mlapi-config
   namespace: {{ .Values.app.env  }}
   labels:
      {{- include "obj.labels" . | nindent 4 }}

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.name }}-dep
+  name: mlapi-dep
   namespace: {{ .Values.app.env  }}
   labels:
   {{- include "obj.labels" . | nindent 4 }}
@@ -9,18 +9,18 @@ spec:
   replicas: {{ .Values.app.replicas }}
   selector:
     matchLabels:
-      app: {{ .Chart.name }}
+      app: mlapi
   template:
     metadata:
       labels:
-        {{- include "obj.labels" . | nindent 8 }}
+        {{- include "mlapi.labels" . | nindent 8 }}
     spec:
       containers:
-        - name: {{ .Chart.name }}
-          image: {{ .Chart.name }}:{{ .Chart.AppVersion }}
+        - name: mlapi
+          image: mlapi:{{ .Chart.AppVersion }}
           imagePullPolicy: IfNotPresent
           resources:
            {{- toYaml .Values.app.computerc | nindent 12 }}
           envFrom:
           - configMapRef:
-              name: {{ .Chart.name }}-config
+              name: mlapi-config

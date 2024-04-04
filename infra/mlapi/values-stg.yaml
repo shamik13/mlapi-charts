@@ -1,17 +1,17 @@
 app:
   replicas: 1
-  env: dev
+  env: stg
   container:
     image: shamik13/mlapi:d548848950c9ecdad72aaa83f418dd54f714d02b
   computerc:
     limits:
-      cpu: 0.2
-      memory: 500Mi
+      cpu: 0.4
+      memory: 600Mi
     requests:
-      cpu: 0.2
-      memory: 500Mi
+      cpu: 0.4
+      memory: 600Mi
   svc:
-    nodeport: 32500
+    nodeport: 32501
 
 hpa:
   enabled: false
