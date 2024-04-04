@@ -1,4 +1,4 @@
 {{- define "mlapi.labels" -}}
-app: mlapi
+app: {{ .Chart.name }}
 env: {{ .Values.app.env  }}
 {{- end -}}

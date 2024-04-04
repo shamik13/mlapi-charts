@@ -2,7 +2,7 @@
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: mlapi-hpa
+  name: {{ .Chart.name }}-hpa
   namespace: {{ .Values.app.env  }}
   annotations:
     {{- include "mlapi.labels" . | nindent 4 }}
@@ -12,6 +12,6 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: Deployment
-    name: mlapi
+    name: {{ .Chart.name }}
   targetCPUUtilizationPercentage: {{ .Values.hpa.cuputi }}
 {{- end -}}

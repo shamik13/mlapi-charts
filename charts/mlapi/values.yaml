@@ -1,8 +1,6 @@
 app:
   replicas: 1
   env: dev
-  container:
-    image: shamik13/mlapi:d548848950c9ecdad72aaa83f418dd54f714d02b
   computerc:
     limits:
       cpu: 0.2
