@@ -10,7 +10,7 @@ spec:
   maxReplicas: {{ .Values.hpa.maxreplicas }}
   minReplicas: {{ .Values.hpa.minrplicas }}
   scaleTargetRef:
-    apiVersion: extensions/v1
+    apiVersion: apps/v1
     kind: Deployment
     name: {{ template "mlapi.name" . }}
   targetCPUUtilizationPercentage: {{ .Values.hpa.cuputi }}
