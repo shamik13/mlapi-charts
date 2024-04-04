@@ -12,6 +12,7 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1
     kind: Deployment
-    name: {{ template "mlapi.name" . }}
+    app: {{ template "mlapi.name" . }}
+    env: {{ .Values.app.env  }}
   targetCPUUtilizationPercentage: {{ .Values.hpa.cuputi }}
 {{- end -}}
